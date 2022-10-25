@@ -56,25 +56,25 @@ Generate the tables for the first time:
 CREATE DATABASE todo_app;
 
 CREATE TABLE Status(
-	id INT NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(191),
   created_at DATETIME(3),
   updated_at DATETIME(3),
 
-	PRIMARY KEY (id)
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE Topic(
-	id INT NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(191),
   created_at DATETIME(3),
   updated_at DATETIME(3),
 
-	PRIMARY KEY (id)
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE Todo(
-	id INT NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT,
 
   title VARCHAR(191),
   description VARCHAR(1024),
@@ -84,12 +84,12 @@ CREATE TABLE Todo(
   created_at DATETIME(3),
   updated_at DATETIME(3),
 
-	PRIMARY KEY (id),
+  PRIMARY KEY (id),
   FOREIGN KEY (status_id) REFERENCES Status(id)
 );
 
 CREATE TABLE TodoToTopic(
-	todo_id INT NOT NULL,
+  todo_id INT NOT NULL,
   topic_id INT NOT NULL,
 
   PRIMARY KEY(todo_id, topic_id),
