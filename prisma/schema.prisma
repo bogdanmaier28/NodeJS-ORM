@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Todo {
+  id            Int       @id @default(autoincrement())
+  title         String
+  description   String
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+
+  topics        Topic[]
+
+  status        Status    @relation(fields: [status_id], references: [id])
+  status_id     Int
+
+  @@fulltext([title, description])
+}
+
+generator Todo {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
+}
+
+model Status {
+  id            Int       @id @default(autoincrement())
+  name          String
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+
+  todos         Todo[]
+
+  @@unique([name])
+}
+
+model Topic {
+  id            Int       @id @default(autoincrement())
+  name          String
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+
+  posts         Todo[]
+}
+
+// model Topic_Todo {
+//   topic         Topic     @relation(fields: [topic_id], references: [id])
+//   topic_id      Int
+
+//   todo          Todo      @relation(fields: [todo_id], references: [id])
+//   todo_id       Int
+
+//   created_at    DateTime  @default(now())
+//   updated_at    DateTime  @updatedAt
+
+//   @@id([topic_id, todo_id])
+// }
