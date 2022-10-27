@@ -55,25 +55,25 @@ Generate the tables for the first time:
 ```sql
 CREATE DATABASE todo_app;
 
-CREATE TABLE Status(
+CREATE TABLE todo_app.Status(
   id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(191),
-  created_at DATETIME(3),
-  updated_at DATETIME(3),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
   PRIMARY KEY (id)
 );
 
-CREATE TABLE Topic(
+CREATE TABLE todo_app.Topic(
   id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(191),
-  created_at DATETIME(3),
-  updated_at DATETIME(3),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
   PRIMARY KEY (id)
 );
 
-CREATE TABLE Todo(
+CREATE TABLE todo_app.Todo(
   id INT NOT NULL AUTO_INCREMENT,
 
   title VARCHAR(191),
@@ -81,19 +81,20 @@ CREATE TABLE Todo(
 
   status_id INT,
 
-  created_at DATETIME(3),
-  updated_at DATETIME(3),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
   PRIMARY KEY (id),
   FOREIGN KEY (status_id) REFERENCES Status(id)
 );
 
-CREATE TABLE TodoToTopic(
+CREATE TABLE todo_app.TodoToTopic(
   todo_id INT NOT NULL,
   topic_id INT NOT NULL,
 
   PRIMARY KEY(todo_id, topic_id),
-  FOREIGN KEY (todo_id) REFERENCES Todo(id),
-  FOREIGN KEY (topic_id) REFERENCES Topic(id)
+
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 ```
