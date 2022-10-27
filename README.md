@@ -32,6 +32,8 @@ DATABASE_URL=mysql://api:Test123456@localhost:3306/todo_app
 PORT=4000
 ```
 
+![diagram](./ConnectionString.png)
+
 Generate prisma client:
 
 ```
@@ -98,3 +100,7 @@ CREATE TABLE todo_app.TodoToTopic(
   updated_at TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 ```
+
+## Useful informations:
+
+[What is a database migration](https://cloud.google.com/architecture/database-migration-concepts-principles-part-1)
